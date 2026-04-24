@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Camp Meeting 2026</title>
+  <style>
+    :root{
+      --navy:#113a6b;
+      --blue:#1f5ea8;
+      --gold:#d6a84f;
+      --gold-light:#f7d97a;
+      --gold-pale:#fff6c7;
+      --cream:#fbf7ef;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --white:#ffffff;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(214,168,79,.18), transparent 28%),
+        linear-gradient(180deg, #eef4fb 0%, #f8fafc 45%, #fffaf1 100%);
+    }
+
+    a{color:inherit}
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:24px 18px 52px;
+      background:
+        linear-gradient(135deg, rgba(10,34,63,.78), rgba(24,84,150,.68)),
+        url('images/indiana-academy.jpg') center/cover no-repeat;
+      color:var(--white);
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top center, rgba(255,255,255,.08), transparent 45%);
+      z-index:0;
+    }
+
+    .clouds{
+      position:absolute;
+      top:0;
+      left:0;
+      width:200%;
+      height:100%;
+      background:url('images/cloud.png') repeat-x;
+      background-size:auto 100%;
+      opacity:.28;
+      animation:moveClouds 70s linear infinite;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    @keyframes moveClouds{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+
+    .logo img{
+      height:120px;
+      width:auto;
+      object-fit:contain;
+    }
+
+    .logo-text{
+      margin-left:-24px;
+      font-size:15px;
+      font-weight:500;
+      color:#ffffff;
+      padding:10px 28px;
+      border-radius:8px;
+      background:linear-gradient(
+        to right,
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.00)
+      );
+      backdrop-filter:blur(8px);
+    }
+
+    .logo-text span{
+      display:none;
+    }
+
+    .logo-text span.active{
+      display:inline;
+    }
+
+    .lang-toggle{
+      margin-left:auto;
+      display:flex;
+      gap:8px;
+      background:rgba(255,255,255,.14);
+      padding:6px;
+      border-radius:999px;
+      backdrop-filter:blur(6px);
+    }
+
+    .lang-btn{
+      border:none;
+      background:transparent;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .lang-btn.active{
+      background:#fff;
+      color:var(--navy);
+    }
+
+    .hero-title-center{
+      text-align:center;
+      margin-bottom:10px;
+    }
+
+    .hero-title-center h1{
+      font-size:clamp(42px, 7vw, 84px);
+      margin:0;
+      font-weight:900;
+      letter-spacing:-0.03em;
+      line-height:1.02;
+      background:linear-gradient(
+        180deg,
+        var(--gold-pale) 0%,
+        var(--gold-light) 22%,
+        var(--gold) 52%,
+        #fff0ad 68%,
+        #b8851f 100%
+      );
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+      text-shadow:0 6px 24px rgba(0,0,0,.25);
+    }
+
+    .hero-subtitle{
+      font-size:clamp(18px, 2.4vw, 26px);
+      font-weight:800;
+      line-height:1.45;
+      margin:10px auto 0;
+      color:#ffffff;
+      text-align:center;
+      max-width:860px;
+      text-shadow:0 4px 20px rgba(0,0,0,.35);
+    }
+
+    main{
+      max-width:1100px;
+      margin:-24px auto 40px;
+      padding:0 18px;
+      position:relative;
+      z-index:3;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:22px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.98);
+      border-radius:26px;
+      box-shadow:0 16px 36px rgba(17,58,107,.12);
+      padding:26px;
+      border:1px solid rgba(17,58,107,.06);
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-size:13px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--blue);
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .card h2{
+      margin:0 0 14px;
+      color:var(--navy);
+      font-size:30px;
+    }
+
+    .card p{
+      line-height:1.65;
+      margin:0 0 14px;
+    }
+
+    .contact-list{
+      display:grid;
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .contact-item{
+      background:linear-gradient(180deg, #fff, #f8fbff);
+      border:1px solid rgba(17,58,107,.08);
+      border-radius:20px;
+      padding:18px;
+    }
+
+    .contact-item h3{
+      margin:0 0 6px;
+      color:var(--navy);
+      font-size:18px;
+    }
+
+    .contact-item p{
+      margin:0;
+      color:var(--muted);
+    }
+
+    form{
+      display:grid;
+      gap:14px;
+      margin-top:10px;
+    }
+
+    label{
+      font-size:14px;
+      font-weight:700;
+      color:var(--navy);
+      margin-bottom:6px;
+      display:block;
+    }
+
+    input, textarea{
+      width:100%;
+      padding:14px 16px;
+      border-radius:14px;
+      border:1px solid rgba(17,58,107,.14);
+      font:inherit;
+      background:#fff;
+    }
+
+    textarea{
+      min-height:150px;
+      resize:vertical;
+    }
+
+    .btn-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      min-height:52px;
+      padding:14px 22px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:800;
+      transition:.22s ease;
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+      border:none;
+      cursor:pointer;
+      font:inherit;
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, #f4d985, #d6a84f);
+      color:#2f2410;
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.94);
+      color:var(--navy);
+      border:1px solid rgba(17,58,107,.08);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px) scale(1.01);
+    }
+
+    .small{
+      color:var(--muted);
+      font-size:14px;
+      margin-top:8px;
+    }
+
+    footer{
+      max-width:1050px;
+      margin:0 auto 30px;
+      padding:0 18px;
+      color:var(--muted);
+      text-align:center;
+      font-size:14px;
+    }
+
+    [data-lang]{display:none}
+    [data-lang].active{display:block}
+    [data-lang-inline]{display:none}
+    [data-lang-inline].active-inline{display:inline}
+
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:680px){
+      .logo-text{
+        font-size:14px;
+        margin-left:0;
+      }
+
+      .lang-toggle{
+        margin-left:0;
+        justify-content:center;
+        width:100%;
+      }
+
+      .hero{
+        padding:16px 14px 34px;
+      }
+
+      main{
+        padding:0 14px;
+      }
+
+      .card{
+        padding:20px;
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+	
+	 .map-box{
+      overflow:hidden;
+      border-radius:22px;
+      border:1px solid rgba(17,58,107,.08);
+      background:linear-gradient(180deg,#f9fbff,#f2f6fc);
+      padding:0;
+      box-shadow:0 10px 24px rgba(17,58,107,.06);
+      width:100%;
+      min-height:520px;
+    }
+
+    .map-embed{
+      display:block;
+      width:100%;
+      height:520px;
+      border:0;
+    }
+
+    /* ================================
+       Mobile-friendly responsive fixes
+       Added to improve phone/tablet layout
+       ================================ */
+    html, body{ max-width:100%; overflow-x:hidden; }
+    img, iframe{ max-width:100%; }
+
+    @media (max-width: 900px){
+      .wrap, main, footer{ width:100%; }
+      .grid{ grid-template-columns:1fr !important; }
+      .hero-meta-center, .hero-meta{ display:grid; grid-template-columns:1fr; gap:12px; width:100%; }
+      .meta-card{ width:100%; }
+      .speaker-grid, .contact-grid{ grid-template-columns:1fr !important; }
+    }
+
+    @media (max-width: 700px){
+      .hero{ padding:14px 12px 34px !important; background-position:center top; }
+      .hero::after{ height:90px; bottom:-46px; }
+      .topbar{ display:grid; grid-template-columns:1fr; justify-items:center; text-align:center; gap:10px; margin-bottom:18px; }
+      .logo img{ height:96px !important; max-width:140px; }
+      .logo-text{ margin-left:0 !important; padding:9px 14px !important; width:100%; max-width:360px; font-size:13px !important; line-height:1.35; background:rgba(255,255,255,.16); }
+      .lang-toggle{ margin-left:0 !important; width:100%; max-width:360px; justify-content:center; flex-wrap:wrap; border-radius:18px; }
+      .lang-btn{ flex:1 1 130px; padding:10px 8px; font-size:13px; }
+      .hero-title-center{ margin-bottom:12px; }
+      .hero-title-center h1{ font-size:clamp(34px, 13vw, 52px) !important; line-height:1.05; overflow-wrap:anywhere; }
+      .hero-subtitle{ font-size:clamp(16px, 5vw, 20px) !important; line-height:1.35 !important; margin:10px auto 16px !important; }
+      .full-width-countdown{ padding:16px 12px !important; border-radius:20px !important; margin-bottom:16px !important; }
+      .full-width-countdown h2{ font-size:19px !important; }
+      .count-grid{ grid-template-columns:repeat(2, minmax(0,1fr)) !important; gap:10px !important; }
+      .count-box{ padding:16px 8px !important; border-radius:16px !important; }
+      .count-num{ font-size:32px !important; }
+      .count-label{ font-size:10px !important; letter-spacing:.08em !important; }
+      .hero-actions, .btn-row{ width:100%; display:grid !important; grid-template-columns:1fr; gap:10px; }
+      .btn{ width:100%; min-height:48px; padding:13px 16px; text-align:center; }
+      main{ margin:-16px auto 30px !important; padding:0 12px !important; }
+      .card{ padding:18px !important; border-radius:20px !important; }
+      .card h2{ font-size:24px !important; line-height:1.2; }
+      .card p{ font-size:15px; }
+      .schedule-item{ grid-template-columns:1fr !important; padding:15px !important; }
+      .guest-img{ width:min(210px, 78vw) !important; height:min(210px, 78vw) !important; }
+      .artist-img{ width:min(155px, 66vw) !important; height:min(155px, 66vw) !important; }
+      .map-box{ min-height:auto !important; }
+      .map-embed{ height:300px !important; }
+      footer{ font-size:12px; line-height:1.5; padding:0 14px; }
+    }
+
+    @media (max-width: 520px){
+      .filter-bar{ display:grid !important; grid-template-columns:1fr; gap:10px; }
+      .filter-btn{ width:100%; padding:13px 14px; }
+      .gallery{ grid-template-columns:1fr !important; }
+      .photo-card{ min-height:auto !important; }
+      .photo-card img{ height:230px !important; }
+      .photo-label{ font-size:13px; }
+      .lightbox{ padding:12px !important; }
+      .lightbox img{ max-height:72vh !important; }
+      .lightbox-btn{ width:42px !important; height:42px !important; font-size:30px !important; }
+      .prev{ left:8px !important; }
+      .next{ right:8px !important; }
+    }
+
+    @media (max-width: 390px){
+      .count-grid{ grid-template-columns:1fr !important; }
+      .hero-title-center h1{ font-size:36px !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="clouds"></div>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="logo">
+          <img src="images/logo.png" alt="JIRAI Logo">
+        </div>
+
+        <div class="logo-text">
+          <span data-lang-inline="en">The Indiana Adventist Haitian Community</span>
+          <span data-lang-inline="frht" class="active-inline">La Communauté Adventiste Haïtienne de l’Indiana</span>
+        </div>
+
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" data-switch="frht">🇭🇹 Français</button>
+          <button class="lang-btn" data-switch="en">🇺🇸 English</button>
+        </div>
+      </div>
+
+      <div class="hero-title-center">
+        <h1 data-lang="frht" class="active">Contactez-nous</h1>
+        <h1 data-lang="en">Contact Us</h1>
+
+        <h2 class="hero-subtitle active" data-lang="frht">
+          Nous sommes là pour répondre à vos questions concernant le Camp Meeting 2026
+        </h2>
+
+        <h2 class="hero-subtitle" data-lang="en">
+          We are here to answer your questions about Camp Meeting 2026
+        </h2>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid">
+
+	  
+	 <div class="card">
+        <span class="eyebrow active" data-lang="frht">Lieu du Camp Meeting</span>
+        <span class="eyebrow" data-lang="en">Camp Meeting Location</span>
+
+        <div class="map-box">
+          <iframe
+            class="map-embed"
+            loading="lazy"
+            allowfullscreen
+            src="https://www.google.com/maps?q=24445+IN-19,+Cicero,+IN+46034&output=embed">
+          </iframe>
+        </div>
+
+        <div class="info-row">
+          <span>24445 IN-19, Cicero, IN 46034</span>
+        </div>
+      </div>
+	  
+
+      <div class="card">
+        <span class="eyebrow active" data-lang="frht">Envoyez-nous un message</span>
+        <span class="eyebrow" data-lang="en">Send Us a Message</span>
+
+		<p data-lang="frht" class="active">
+          Pour toute question concernant le programme, <br>les T-shirts, les artistes invités, l’emplacement ou les informations générales, remplissez ci-dessous.
+        </p>
+
+        <p data-lang="en">
+          For questions about the program, T-shirts, guest artists, location, or general information, please fill out the form below.
+        </p>
+
+        <form action="https://formsubmit.co/elisalom001@gmail.com" method="POST">
+          <div>
+            <label data-lang="frht" class="active" for="name">Nom</label>
+            <label data-lang="en" for="name">Name</label>
+            <input id="name" type="text" name="name" placeholder="Your Name / Votre nom" required>
+          </div>
+
+          <div>
+            <label data-lang="frht" class="active" for="email">Email</label>
+            <label data-lang="en" for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="Your Email / Votre email" required>
+          </div>
+
+          <div>
+            <label data-lang="frht" class="active" for="message">Message</label>
+            <label data-lang="en" for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Your Message / Votre message" required></textarea>
+          </div>
+
+          <input type="hidden" name="_subject" value="Camp Meeting Contact Form">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="thankyou.html">
+
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary active" data-lang="frht">Envoyer le message</button>
+            <button type="submit" class="btn btn-primary" data-lang="en">Send Message</button>
+          </div>
+		  
+		  <div class="btn-row">
+          <a class="btn btn-secondary active" data-lang="frht" href="index.html">Retour à l’accueil</a>
+          <a class="btn btn-secondary" data-lang="en" href="index.html">Back to Home</a>
+        </div>
+        </form>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Camp Meeting 2026 • Sponsored by the Indiana Conference of Seventh-day Adventists (ICSDA) | Organized by Indiana Franco-Haitian Ministries (IFHAM)
+  </footer>
+
+  <script>
+    const langButtons = document.querySelectorAll(".lang-btn");
+    const langBlocks = document.querySelectorAll("[data-lang]");
+    const inlineLangBlocks = document.querySelectorAll("[data-lang-inline]");
+
+    function setLanguage(lang) {
+      langBlocks.forEach(el => {
+        el.classList.toggle("active", el.dataset.lang === lang);
+      });
+
+      inlineLangBlocks.forEach(el => {
+        el.classList.toggle("active-inline", el.dataset.langInline === lang);
+      });
+
+      langButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.switch === lang);
+      });
+
+      document.documentElement.lang = lang === "frht" ? "fr" : "en";
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener("click", () => setLanguage(btn.dataset.switch));
+    });
+
+    setLanguage("frht");
+  </script>
+</body>
+</html>

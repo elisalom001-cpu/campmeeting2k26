@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camp Meeting 2026</title>
+  <style>
+    :root{
+      --navy:#113a6b;
+      --blue:#1f5ea8;
+      --gold:#d6a84f;
+      --gold-light:#f7d97a;
+      --gold-pale:#fff6c7;
+      --cream:#fbf7ef;
+      --red:#b83333;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --white:#ffffff;
+      --shadow:0 12px 30px rgba(17,58,107,.14);
+      --shadow-soft:0 16px 36px rgba(17,58,107,.12);
+      --radius:24px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top right, rgba(214,168,79,.18), transparent 28%),
+        linear-gradient(180deg, #eef4fb 0%, #f8fafc 45%, #fffaf1 100%);
+    }
+
+    a{color:inherit}
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      padding:22px 18px 46px;
+      background:
+        linear-gradient(135deg, rgba(10,34,63,.78), rgba(24,84,150,.68)),
+        url('images/indiana-academy.jpg') center/cover no-repeat;
+      color:var(--white);
+      z-index:1;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top center, rgba(255,255,255,.08), transparent 45%);
+      z-index:0;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -10% -80px -10%;
+      height:160px;
+      background:var(--cream);
+      border-radius:50% 50% 0 0 / 100% 100% 0 0;
+      opacity:.95;
+    }
+
+    .clouds{
+      position:absolute;
+      top:0;
+      left:0;
+      width:200%;
+      height:100%;
+      background:url('images/cloud.png') repeat-x;
+      background-size:auto 100%;
+      opacity:.28;
+      animation:moveClouds 70s linear infinite;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    @keyframes moveClouds{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+
+    .wrap{
+      max-width:1150px;
+      margin:0 auto;
+      position:relative;
+      z-index:2;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:28px;
+      flex-wrap:wrap;
+    }
+
+    .logo img{
+      height:150px;
+      width:auto;
+      object-fit:contain;
+      position:relative;
+      z-index:3;
+      flex-shrink:0;
+    }
+
+    @media (min-width:768px){
+      .logo img{height:170px}
+    }
+
+    .logo-text{
+      position:relative;
+      z-index:1;
+      margin-left:-40px;
+      font-size:15px;
+      font-weight:500;
+      color:#ffffff;
+      padding:10px 40px;
+      border-radius:8px;
+      background:linear-gradient(
+        to right,
+        rgba(255,255,255,0.25),
+        rgba(255,255,255,0.00)
+      );
+      backdrop-filter:blur(8px);
+    }
+
+    .logo-text span{display:none}
+    .logo-text span.active{display:inline}
+
+    .lang-toggle{
+      margin-left:auto;
+      display:flex;
+      gap:8px;
+      background:rgba(255,255,255,.14);
+      padding:6px;
+      border-radius:999px;
+      backdrop-filter:blur(6px);
+    }
+
+    .lang-btn{
+      border:none;
+      background:transparent;
+      color:#fff;
+      padding:10px 14px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:14px;
+    }
+
+    .lang-btn.active{
+      background:#fff;
+      color:var(--navy);
+    }
+
+    .hero-title-center{
+      text-align:center;
+      margin-bottom:18px;
+    }
+
+    .hero-title-center h1{
+      font-size:clamp(54px, 8vw, 96px);
+      margin:0;
+      font-weight:900;
+      letter-spacing:-0.03em;
+      line-height:1.02;
+      background:linear-gradient(
+        180deg,
+        var(--gold-pale) 0%,
+        var(--gold-light) 22%,
+        var(--gold) 52%,
+        #fff0ad 68%,
+        #b8851f 100%
+      );
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      color:transparent;
+      text-shadow:0 6px 24px rgba(0,0,0,.25);
+    }
+
+    .hero-subtitle{
+      font-size:clamp(16px, 2.6vw, 24px);
+      font-weight:800;
+      line-height:3;
+      margin:10px auto 22px;
+      color:#ffffff;
+      text-align:center;
+      max-width:900px;
+      text-shadow:0 4px 20px rgba(0,0,0,.35);
+    }
+
+    .hero-meta-center{
+      display:flex;
+      justify-content:center;
+      gap:18px;
+      margin:0 auto 22px;
+      max-width:760px;
+      flex-wrap:wrap;
+    }
+
+    .meta-card{
+      flex:1 1 280px;
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:20px;
+      padding:18px;
+      text-align:center;
+      backdrop-filter:blur(8px);
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+    }
+
+    .meta-link{
+      text-decoration:none;
+      cursor:pointer;
+      transition:.22s ease;
+    }
+
+    .meta-link:hover{
+      transform:translateY(-2px) scale(1.01);
+      background:rgba(255,255,255,.22);
+    }
+
+    .meta-label{
+      display:block;
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      opacity:.82;
+      margin-bottom:8px;
+    }
+
+    .meta-value{
+      font-size:19px;
+      line-height:1.4;
+      font-weight:800;
+    }
+
+    .full-width-countdown{
+      max-width:980px;
+      margin:0 auto 18px;
+      padding:26px;
+      border-radius:28px;
+      background:rgba(255,255,255,.97);
+      box-shadow:0 18px 45px rgba(8,24,48,.18);
+    }
+
+    .full-width-countdown h2{
+      margin:0 0 18px;
+      font-size:24px;
+      text-align:center;
+      color:var(--navy);
+    }
+
+    .count-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+    }
+
+    .count-box{
+      background:linear-gradient(180deg, #fffaf0, #f8f3e8);
+      border-radius:22px;
+      padding:26px 16px;
+      text-align:center;
+      border:1px solid rgba(17,58,107,.08);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.8);
+    }
+
+    .count-num{
+      display:block;
+      font-size:clamp(28px, 4vw, 42px);
+      font-weight:900;
+      color:var(--red);
+      line-height:1;
+    }
+
+    .count-label{
+      margin-top:8px;
+      font-size:12px;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .hero-actions{
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .btn{
+      display:inline-flex;
+      justify-content:center;
+      align-items:center;
+      min-height:52px;
+      padding:14px 22px;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:800;
+      transition:.22s ease;
+      box-shadow:0 10px 24px rgba(0,0,0,.12);
+    }
+
+    .btn-primary{
+      background:linear-gradient(180deg, #f4d985, #d6a84f);
+      color:#2f2410;
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.94);
+      color:var(--navy);
+    }
+
+    .btn-outline{
+      background:transparent;
+      color:var(--navy);
+      border:2px solid rgba(17,58,107,.18);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px) scale(1.01);
+    }
+
+    main{
+      max-width:1150px;
+      margin:-25px auto 40px;
+      padding:0 18px;
+      position:relative;
+      z-index:3;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:22px;
+      margin-bottom:22px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.98);
+      border-radius:26px;
+      box-shadow:0 16px 36px rgba(17,58,107,.12);
+      padding:26px;
+      border:1px solid rgba(17,58,107,.06);
+    }
+
+    .card h2{
+      margin:0 0 14px;
+      color:var(--navy);
+      font-size:30px;
+    }
+
+    .card p{
+      line-height:1.6;
+      margin:0 0 12px;
+    }
+
+    .eyebrow{
+      display:inline-block;
+      font-size:13px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--blue);
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .schedule-list{
+      display:grid;
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .schedule-item{
+      display:grid;
+      grid-template-columns:165px 1fr;
+      gap:14px;
+      align-items:start;
+      padding:18px;
+      border-radius:20px;
+      background:linear-gradient(180deg, #f9fbff, #f7f8fb);
+      border:1px solid rgba(17,58,107,.08);
+      box-shadow:0 8px 20px rgba(17,58,107,.05);
+    }
+
+    .time{
+      font-weight:900;
+      color:var(--red);
+      line-height:1.4;
+    }
+
+    .event{
+      font-weight:800;
+      color:var(--navy);
+      margin-bottom:4px;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .guest-feature{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+      padding:22px;
+      border-radius:20px;
+      background:linear-gradient(180deg, #fffaf0, #fff);
+      border:1px solid rgba(17,58,107,.08);
+    }
+
+    .guest-img{
+      width:270px;
+      height:270px;
+      object-fit:cover;
+      border-radius:50%;
+      border:5px solid rgba(214,168,79,.75);
+      box-shadow:0 12px 30px rgba(0,0,0,.16);
+      margin-bottom:14px;
+    }
+
+    .guest-name{
+      margin:6px 0 10px;
+      color:var(--navy);
+      font-size:24px;
+    }
+
+    .guest-bio{
+      margin:0;
+      color:var(--muted);
+      line-height:1.65;
+      max-width:500px;
+    }
+
+    .speaker-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+      margin-top:8px;
+    }
+
+    .speaker{
+      border-radius:22px;
+      padding:22px;
+      background:linear-gradient(180deg, #fff, #f8fbff);
+      border:1px solid rgba(17,58,107,.08);
+      text-align:center;
+      box-shadow:0 10px 24px rgba(17,58,107,.06);
+    }
+
+    .artist-img{
+      width:190px;
+      height:190px;
+      object-fit:cover;
+      border-radius:50%;
+      margin:0 auto 14px;
+      display:block;
+      border:4px solid rgba(214,168,79,.7);
+      box-shadow:0 10px 24px rgba(0,0,0,.14);
+    }
+
+    .speaker:hover .artist-img{
+      transform:scale(1.05);
+      transition:.2s ease;
+    }
+
+    .speaker h3{
+      margin:0 0 6px;
+      color:var(--navy);
+      font-size:20px;
+    }
+
+    .speaker p{
+      margin:0;
+      font-size:15px;
+      color:var(--muted);
+      line-height:1.55;
+    }
+
+    .map-box{
+      overflow:hidden;
+      border-radius:22px;
+      border:1px solid rgba(17,58,107,.08);
+      background:linear-gradient(180deg,#f9fbff,#f2f6fc);
+      padding:16px;
+      box-shadow:0 10px 24px rgba(17,58,107,.06);
+    }
+
+    .map-embed{
+      width:100%;
+      height:320px;
+      border:0;
+      border-radius:16px;
+      display:block;
+      background:#f3f4f6;
+    }
+
+    .info-row{
+      padding:14px 16px;
+      border-radius:16px;
+      background:var(--cream);
+      border:1px solid rgba(17,58,107,.08);
+      text-align:center;
+      margin-top:16px;
+    }
+
+    .shirt-box{
+      background:linear-gradient(180deg, #fff8ea, #fff);
+      border:1px solid rgba(214,168,79,.35);
+    }
+
+    .contact-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:12px;
+    }
+
+    .contact-item{
+      background:linear-gradient(180deg, #fff, #f8fbff);
+      border:1px solid rgba(17,58,107,.08);
+      border-radius:20px;
+      padding:20px;
+      text-align:center;
+    }
+
+    .contact-item h3{
+      margin:0 0 8px;
+      font-size:18px;
+      color:var(--navy);
+    }
+
+    footer{
+      max-width:1050px;
+      margin:0 auto 30px;
+      padding:0 18px;
+      color:var(--muted);
+      text-align:center;
+      font-size:14px;
+    }
+
+    [data-lang]{display:none}
+    [data-lang].active{display:block}
+
+    @media (max-width:900px){
+      .grid{
+        grid-template-columns:1fr;
+      }
+
+      .count-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .speaker-grid,
+      .contact-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:680px){
+      .logo-text{
+        font-size:14px;
+        margin-left:0;
+      }
+
+      .lang-toggle{
+        margin-left:0;
+        justify-content:center;
+        width:100%;
+      }
+
+      .hero{
+        padding:16px 14px 34px;
+      }
+
+      main{
+        padding:0 14px;
+      }
+
+      .card{
+        padding:20px;
+      }
+
+      .schedule-item{
+        grid-template-columns:1fr;
+      }
+
+      .hero-title-center h1{
+        font-size:clamp(42px, 11vw, 64px);
+      }
+
+      .hero-subtitle{
+        font-size:20px;
+        line-height:1.35;
+      }
+
+      .full-width-countdown{
+        padding:18px;
+      }
+
+      .hero-actions{
+        gap:10px;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .map-embed{
+        height:260px;
+      }
+
+      .guest-img{
+        width:220px;
+        height:220px;
+      }
+
+      .artist-img{
+        width:160px;
+        height:160px;
+      }
+    }
+
+    /* ================================
+       Mobile-friendly responsive fixes
+       Added to improve phone/tablet layout
+       ================================ */
+    html, body{ max-width:100%; overflow-x:hidden; }
+    img, iframe{ max-width:100%; }
+
+    @media (max-width: 900px){
+      .wrap, main, footer{ width:100%; }
+      .grid{ grid-template-columns:1fr !important; }
+      .hero-meta-center, .hero-meta{ display:grid; grid-template-columns:1fr; gap:12px; width:100%; }
+      .meta-card{ width:100%; }
+      .speaker-grid, .contact-grid{ grid-template-columns:1fr !important; }
+    }
+
+    @media (max-width: 700px){
+      .hero{ padding:14px 12px 34px !important; background-position:center top; }
+      .hero::after{ height:90px; bottom:-46px; }
+      .topbar{ display:grid; grid-template-columns:1fr; justify-items:center; text-align:center; gap:10px; margin-bottom:18px; }
+      .logo img{ height:96px !important; max-width:140px; }
+      .logo-text{ margin-left:0 !important; padding:9px 14px !important; width:100%; max-width:360px; font-size:13px !important; line-height:1.35; background:rgba(255,255,255,.16); }
+      .lang-toggle{ margin-left:0 !important; width:100%; max-width:360px; justify-content:center; flex-wrap:wrap; border-radius:18px; }
+      .lang-btn{ flex:1 1 130px; padding:10px 8px; font-size:13px; }
+      .hero-title-center{ margin-bottom:12px; }
+      .hero-title-center h1{ font-size:clamp(34px, 13vw, 52px) !important; line-height:1.05; overflow-wrap:anywhere; }
+      .hero-subtitle{ font-size:clamp(16px, 5vw, 20px) !important; line-height:1.35 !important; margin:10px auto 16px !important; }
+      .full-width-countdown{ padding:16px 12px !important; border-radius:20px !important; margin-bottom:16px !important; }
+      .full-width-countdown h2{ font-size:19px !important; }
+      .count-grid{ grid-template-columns:repeat(2, minmax(0,1fr)) !important; gap:10px !important; }
+      .count-box{ padding:16px 8px !important; border-radius:16px !important; }
+      .count-num{ font-size:32px !important; }
+      .count-label{ font-size:10px !important; letter-spacing:.08em !important; }
+      .hero-actions, .btn-row{ width:100%; display:grid !important; grid-template-columns:1fr; gap:10px; }
+      .btn{ width:100%; min-height:48px; padding:13px 16px; text-align:center; }
+      main{ margin:-16px auto 30px !important; padding:0 12px !important; }
+      .card{ padding:18px !important; border-radius:20px !important; }
+      .card h2{ font-size:24px !important; line-height:1.2; }
+      .card p{ font-size:15px; }
+      .schedule-item{ grid-template-columns:1fr !important; padding:15px !important; }
+      .guest-img{ width:min(210px, 78vw) !important; height:min(210px, 78vw) !important; }
+      .artist-img{ width:min(155px, 66vw) !important; height:min(155px, 66vw) !important; }
+      .map-box{ min-height:auto !important; }
+      .map-embed{ height:300px !important; }
+      footer{ font-size:12px; line-height:1.5; padding:0 14px; }
+    }
+
+    @media (max-width: 520px){
+      .filter-bar{ display:grid !important; grid-template-columns:1fr; gap:10px; }
+      .filter-btn{ width:100%; padding:13px 14px; }
+      .gallery{ grid-template-columns:1fr !important; }
+      .photo-card{ min-height:auto !important; }
+      .photo-card img{ height:230px !important; }
+      .photo-label{ font-size:13px; }
+      .lightbox{ padding:12px !important; }
+      .lightbox img{ max-height:72vh !important; }
+      .lightbox-btn{ width:42px !important; height:42px !important; font-size:30px !important; }
+      .prev{ left:8px !important; }
+      .next{ right:8px !important; }
+    }
+
+    @media (max-width: 390px){
+      .count-grid{ grid-template-columns:1fr !important; }
+      .hero-title-center h1{ font-size:36px !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="clouds"></div>
+
+    <div class="wrap">
+      <div class="topbar">
+        <div class="logo">
+          <img src="images/logo.png" alt="JIRAI Logo">
+        </div>
+
+        <div class="logo-text">
+          <span data-lang="en">The Indiana Adventist Haitian Community</span>
+          <span data-lang="frht">La Communauté Adventiste Haïtienne de l’Indiana</span>
+        </div>
+
+        <div class="lang-toggle" aria-label="Language toggle">
+          <button class="lang-btn active" data-switch="frht">🇭🇹 Français</button>
+          <button class="lang-btn" data-switch="en">🇺🇸 English</button>
+        </div>
+      </div>
+
+      <div class="hero-title-center">
+        <h1 data-lang="frht" class="active">Camp Meeting 2026</h1>
+        <h1 data-lang="en">Camp Meeting 2026</h1>
+
+        <h2 class="hero-subtitle active" data-lang="frht">
+          Une journée d’adoration, de fraternité, de musique et de joie
+        </h2>
+
+        <h2 class="hero-subtitle" data-lang="en">
+          A day of worship, fellowship, music, and joy
+        </h2>
+      </div>
+
+      <div class="hero-meta hero-meta-center">
+        <div class="meta-card">
+          <span class="meta-label">Date</span>
+          <div class="meta-value active" data-lang="frht">6 Juin 2026</div>
+          <div class="meta-value" data-lang="en">June 6, 2026</div>
+        </div>
+
+        <a class="meta-card meta-link" href="#location" aria-label="View Camp Meeting location map">
+          <span class="meta-label active" data-lang="frht">Lieu</span>
+          <span class="meta-label" data-lang="en">Location</span>
+          <div class="meta-value">Indiana Academy<br>Cicero, IN</div>
+        </a>
+      </div>
+
+      <div class="countdown-card full-width-countdown">
+        <h2 data-lang="frht" class="active">Compte à rebours jusqu’au Camp Meeting</h2>
+        <h2 data-lang="en">Countdown to Camp Meeting</h2>
+
+        <div class="count-grid">
+          <div class="count-box">
+            <span class="count-num" id="days">0</span>
+            <div class="count-label" data-unit="days">Days</div>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="hours">0</span>
+            <div class="count-label" data-unit="hours">Hours</div>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="minutes">0</span>
+            <div class="count-label" data-unit="minutes">Minutes</div>
+          </div>
+          <div class="count-box">
+            <span class="count-num" id="seconds">0</span>
+            <div class="count-label" data-unit="seconds">Seconds</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary active"
+           data-lang="frht"
+           href="#tshirt"
+           target="_blank"
+           rel="noopener">
+          Inscription T-shirt
+        </a>
+
+        <a class="btn btn-primary"
+           data-lang="en"
+           href="#tshirt"
+           target="_blank"
+           rel="noopener">
+          T-Shirt Registration
+        </a>
+
+        <a class="btn btn-secondary active" data-lang="frht" href="photos.html">Photos Camp Meeting</a>
+        <a class="btn btn-secondary" data-lang="en" href="photos.html">Camp Meeting Photos</a>
+
+        <a class="btn btn-secondary active" data-lang="frht" href="contact.html">Contactez-Nous</a>
+        <a class="btn btn-secondary" data-lang="en" href="contact.html">Contact Us</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="grid">
+      <div class="card" id="program">
+        <span class="eyebrow active" data-lang="frht">Programme de la journée</span>
+        <span class="eyebrow" data-lang="en">Program for the day</span>
+
+        <p data-lang="frht" class="active">
+          Voici l’horaire provisoire de la journée. Merci d’arriver à temps et de prévoir de rester avec nous pour toute l’expérience.
+        </p>
+        <p data-lang="en">
+          Here is the tentative schedule for the day. Please plan to arrive on time and stay with us for the full experience.
+        </p>
+
+        <div class="schedule-list">
+          <div class="schedule-item">
+            <div class="time">09:00 AM – 12:30 PM</div>
+            <div>
+              <div class="event active" data-lang="frht">Culte d’adoration</div>
+              <div class="event" data-lang="en">Church Service</div>
+              <div class="muted active" data-lang="frht">École du Sabbat, louange et adoration, prière et prédication.</div>
+              <div class="muted" data-lang="en">Sabbath School, praise and worship, prayer, and preaching.</div>
+            </div>
+          </div>
+
+          <div class="schedule-item">
+            <div class="time">12:30 PM – 01:00 PM</div>
+            <div>
+              <div class="event active" data-lang="frht">Cérémonie de baptême</div>
+              <div class="event" data-lang="en">Baptism Ceremony</div>
+            </div>
+          </div>
+
+          <div class="schedule-item">
+            <div class="time">01:15 PM – 03:00 PM</div>
+            <div>
+              <div class="event active" data-lang="frht">Récréation, nourriture et fraternité</div>
+              <div class="event" data-lang="en">Recreation, Food, and Fellowship</div>
+              <div class="muted active" data-lang="frht">Temps de détente, jeux, repas et échanges fraternels.</div>
+              <div class="muted" data-lang="en">A relaxed time for food, games, community, and fellowship.</div>
+            </div>
+          </div>
+
+          <div class="schedule-item">
+            <div class="time">03:15 PM – 06:00 PM</div>
+            <div>
+              <div class="event active" data-lang="frht">Concert de l’après-midi</div>
+              <div class="event" data-lang="en">Afternoon Concert</div>
+              <div class="muted active" data-lang="frht">Musique, chants spéciaux, animation, concours biblique, cadeaux et célébration spirituelle.</div>
+              <div class="muted" data-lang="en">Music, special songs, entertainment, Bible competition, gifts, and a joyful spiritual celebration.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="card">
+        <span class="eyebrow active" data-lang="frht">Invité spécial</span>
+        <span class="eyebrow" data-lang="en">Special Guest</span>
+
+        <div class="guest-feature">
+          <img src="images/guest.jpg" alt="Dr. Seneque Edmond" class="guest-img">
+          <h3 class="guest-name">Dr. Seneque Edmond</h3>
+
+          <p class="guest-bio active" data-lang="frht">
+            Dr. Seneque Edmond est le président actuel de l’Université Adventiste d’Haïti (UNAH). Il est un orateur inspirant et un leader engagé, reconnu pour ses messages profonds sur la foi, la famille et la croissance spirituelle.
+          </p>
+
+          <p class="guest-bio" data-lang="en">
+            Dr. Seneque Edmond is the current president of the Adventist University of Haiti (UNAH). He is an inspiring speaker and dedicated leader known for his impactful messages on faith, family, and spiritual growth.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid">
+      <div class="card" id="photos">
+        <span class="eyebrow active" data-lang="frht">Artistes invités</span>
+        <span class="eyebrow" data-lang="en">Guest Artists</span>
+
+        <div class="speaker-grid">
+		  <div class="speaker">
+            <img src="images/bernide.png" alt="Bernide Jean" class="artist-img">
+            <h3>Bernide Jean</h3>
+            <p class="active" data-lang="frht">Chanteuse</p>
+            <p class="active" data-lang="en">Singer</p>
+          </div>
+		  
+          <div class="speaker">
+            <img src="images/edony.jpg" alt="Edony Princivil" class="artist-img">
+            <h3>Edony Princivil</h3>
+            <p class="active" data-lang="frht">Chanteur</p>
+            <p class="active" data-lang="en">Singer</p>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div class="card" id="location">
+        <span class="eyebrow active" data-lang="frht">Localisation</span>
+        <span class="eyebrow" data-lang="en">Location</span>
+
+        <div class="map-box">
+          <iframe
+            class="map-embed"
+            loading="lazy"
+            allowfullscreen
+            src="https://www.google.com/maps?q=24445+IN-19,+Cicero,+IN+46034&output=embed">
+          </iframe>
+        </div>
+
+        <div class="info-row">
+          <span>24445 IN-19, Cicero, IN 46034</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card shirt-box" id="tshirt" >
+	
+      <span class="eyebrow active" data-lang="frht" style="text-align:center;"> Inscription pour les T-shirts</span>
+		
+      <span class="eyebrow active" data-lang="en" style="text-align:center;"> T-Shirts' Registration </span>
+		
+    
+
+      <p data-lang="frht" class="active" style="text-align:center;">
+        Inscrivez-vous pour commander votre T-shirt officiel du Camp Meeting 2026. Le T-shirt est une excellente façon de représenter la communauté et de garder un souvenir spécial de cet événement. Veuillez remplir le formulaire pour sélectionner votre taille et confirmer votre commande. Les maillots sont au prix de $15 pour les adultes et les adolescents de 16 ans et plus, et $10 pour les enfants de 0 à 15 ans.<strong> Après avoir enregistré votre taille, remettez les frais à votre pasteur, leader, ou premier ancien.</strong>
+      </p>
+
+      <p data-lang="en" style="text-align:center;">
+        Register to order your official Camp Meeting 2026 T-shirt. This is a great way to represent the community and keep a special memory of the event. Please complete the form to select your size and confirm your order. T-shirts are priced at $15 for adults and teens ages 16 and older, and $10 for children ages 0 to 15. <strong> After registering your size, please submit payment to your pastor, leader, or first elder.</strong>
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary active"
+           data-lang="frht"
+           href="https://form.jotform.com/261120572406144"
+           target="_blank"
+           rel="noopener">
+          S’inscrire maintenant
+        </a>
+
+        <a class="btn btn-primary"
+           data-lang="en"
+           href="https://form.jotform.com/261120572406144"
+           target="_blank"
+           rel="noopener">
+          Register Now
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Camp Meeting 2026 • Sponsored by the Indiana Conference of Seventh-day Adventists (ICSDA) | Organized by Indiana Franco-Haitian Ministries (IFHAM)
+  </footer>
+
+  <script>
+    const targetDate = new Date("2026-06-06T09:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      let distance = targetDate - now;
+      if (distance < 0) distance = 0;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((distance / (1000 * 60)) % 60);
+      const seconds = Math.floor((distance / 1000) % 60);
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    const langButtons = document.querySelectorAll(".lang-btn");
+    const langBlocks = document.querySelectorAll("[data-lang]");
+    const unitLabels = {
+      frht: { days: "Jours", hours: "Heures", minutes: "Minutes", seconds: "Secondes" },
+      en:   { days: "Days", hours: "Hours", minutes: "Minutes", seconds: "Seconds" }
+    };
+
+    function setLanguage(lang) {
+      langBlocks.forEach(el => {
+        el.classList.toggle("active", el.dataset.lang === lang);
+      });
+
+      langButtons.forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.switch === lang);
+      });
+
+      document.querySelectorAll("[data-unit]").forEach(el => {
+        const key = el.dataset.unit;
+        el.textContent = unitLabels[lang][key];
+      });
+
+      document.documentElement.lang = lang === "frht" ? "fr" : "en";
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener("click", () => setLanguage(btn.dataset.switch));
+    });
+
+    setLanguage("frht");
+  </script>
+</body>
+</html>
